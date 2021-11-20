@@ -1,6 +1,7 @@
 const express = require('express')
 const { 
-  createFrankfurtcontact
+   createFrankfurtcontact,
+   getFrankfurtcontact
         } = require('../controller/frankfurtcontact')
 const FrankfurtContact = require('../models/Frankfurtcontact') 
 
@@ -15,7 +16,7 @@ const advancedResults = require('../middleware/advancedResult')
 
 router
 .route('/')
-//.get(advancedResults(User), getUsers)   
+.get(getFrankfurtcontact)   
 .post(createFrankfurtcontact)
 
 router

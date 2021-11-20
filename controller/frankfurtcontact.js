@@ -3,12 +3,17 @@ const asyncHandler = require('../middleware/async')
 const User = require('../models/User')
 const Frankfurtcontact = require('../models/Frankfurtcontact')
 
-//@desc  Get All User
-//@route  GET /api/v1/auth/users
+//@desc  Get All Contacts
+//@route  GET /api/v1/frankfurtcontact
 //@access  Private/admin
 
-exports.getUsers = asyncHandler(async (req, res, next) => {
-    res.status(200).json(res.advancedResults)
+exports.getFrankfurtcontact = asyncHandler(async (req, res, next) => {
+    const frankfurtcontact = await Frankfurtcontact.find()
+
+    res.status(200).json({
+        success: true,
+        data: frankfurtcontact
+    })
 })
 
 //@desc  Get A Single  User
