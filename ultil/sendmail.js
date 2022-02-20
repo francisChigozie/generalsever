@@ -1,27 +1,44 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv')
+       dotenv.config({path:'./config.env'})
 
-const sendMail = async (options) => {
-    //Create reusable transport object using the default SMPT
-    const transport = nodemailer.createTransport({
-        host: process.env.SMPT_HOST,
-        port: process.env.SMPT_PORT,
-        auth: {
-            user: process.env.SMPT_EMAIL,
-            pass: process.env.SMPT_PASSWORD
+   async function sendmail(email){
+    try{
+     const  transporter = nodemailer.createTransport({
+     host: 'mail.chigoziefrancis-portfolio.dev',
+     port: 587,
+     secure: false,
+     auth: {
+         user: 'contactfrancis@chigoziefrancis-portfolio.dev',
+         pass: process.env.SENDMAIL_PASS,
+  },
+  tls:{
+      rejectUnauthorized: false
+  }
+});
+
+        var mailOptions = {
+        from: `"Francis Web & App" <contactfrancis@chigoziefrancis-portfolio.dev>`,
+        to: email,
+        subject: 'A Warm Welcome',
+        text: 'Write you soon',
+        html: "<h3>Thank You and I Will write you soon:</h3><br>" +
+              "</a><br><a href='https://github.com/francisChigozie'> Visit My Git/Hub</a><br><br>" +
+               "From the Management:<br>Francis Web & App  <br> Heilbronn, Germany <br> Tel:+49 1713345532"
+         
+    };
+
+    await transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
         }
     });
-
-    //Send Email with defined transport object
-    const message = {
-        from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
-        to: options.email,
-        subject: options.subject,
-        text: options.message
+    
+    }catch(error){
+        console.log(error.message)
     }
-
-    const info = await transport.sendMail(message)
-
-    console.log('Message sent: %s',  info.messageId)
 }
 
-module.exports = sendMail;
+module.exports = sendmail;

@@ -2,7 +2,7 @@ POST http://localhost:5000/api/v1/frankfurtcontact
 Content-Type: application/json
 
 {
-    "name": "franky",
-    "email": "franky@gmail.com",
-    "phone": "+564567898"
+    "name": "Joseph Prince",
+    "email": "prince@gmail.com",
+    "phone": "+234556669"
 }
