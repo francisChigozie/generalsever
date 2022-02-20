@@ -41,6 +41,9 @@ if(process.env.NODE_ENV === 'development'){
 app.use(cors({
     origin: "https://frankfurtfintek.netlify.app"
 }))
+app.use((cors({
+    origin: 'https://it-systemlogger.netlify.app'
+})))
 
 
 
